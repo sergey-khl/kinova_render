@@ -116,7 +116,7 @@ public class JointController : MonoBehaviour
                     // scene.Data->xfrc_applied[6*body.MujocoId + 1] = mjForce.y;
                     // scene.Data->xfrc_applied[6*body.MujocoId + 2] = mjForce.z;
                     
-                    Debug.Log($"Applied force {force} to {actuator.name} has values F {actuator.Force} V:{actuator.Velocity} L:{actuator.Length}");
+                    // Debug.Log($"Applied force {force} to {actuator.name} has values F {actuator.Force} V:{actuator.Velocity} L:{actuator.Length}");
                 }
             }
         }

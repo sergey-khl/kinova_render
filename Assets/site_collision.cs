@@ -58,6 +58,8 @@ namespace Mujoco {
 
         void OnDrawGizmos()
         {
+            Debug.Log("here");
+
             if (!Application.isPlaying) return;
             unsafe {
                 MujocoLib.mjModel_* model = MjScene.Instance.Model;
@@ -73,11 +75,11 @@ namespace Mujoco {
                     MujocoLib.mj_contactForce(model, data, i, daforce);
 
                     // Get geometry names from model
-                    // int geom1Name = model->names[model->name_geomadr[geom1Id]];
-                    // int geom2Name = model->names[model->name_geomadr[geom2Id]];
                     // string geom2Name = MujocoLib.mj_id2name(model, 5, geom2Id);
+                    int geom1Name = model->names[model->name_geomadr[geom1Id]];
+                    int geom2Name = model->names[model->name_geomadr[geom2Id]];
 
-                    // Debug.Log($"Contact {i}: geom1 ID = {geom1Id} (Name: {geom1Name}), geom2 ID = {geom2Id} (Name: {geom2Name})");
+                    Debug.Log($"Contact {i}: geom1 ID = {geom1Id} (Name: {geom1Name}), geom2 ID = {geom2Id} (Name: {geom2Name})");
                     if (geom1Id != 0 || geom2Id != 5) {
 
                         Debug.Log($"Contact {i}: geom1 ID = {geom1Id} {geom2Id} at position {pos[0]} {pos[1]} {pos[2]} with a force of {daforce[0]} {daforce[1]} {daforce[2]}");

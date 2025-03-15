@@ -1,0 +1,72 @@
+<mujoco model="phantom">
+  <compiler angle="radian" meshdir="assets"/>
+
+  <option integrator="implicitfast"/>
+
+  <default>
+    <default class="visual">
+      <geom type="mesh" contype="0" conaffinity="0" group="2" rgba="0.75294 0.75294 0.75294 1"/>
+    </default>
+    <default class="collision">
+      <geom type="mesh" group="3"/>
+    </default>
+    <default class="large_actuator">
+      <position kp="10" kv="1" forcerange="-10 10"/>
+    </default>
+    <default class="small_actuator">
+      <position kp="5" kv="0.5" forcerange="-5 5"/>
+    </default>
+  </default>
+
+  <asset>
+    <mesh name="base" file="base.stl"/>
+    <mesh name="lower_arm" file="lower_arm.stl"/>
+    <mesh name="pen" file="pen.stl"/>
+    <mesh name="tip" file="tip.stl"/>
+    <mesh name="torso" file="torso.stl"/>
+    <mesh name="upper_arm" file="upper_arm.stl"/>
+    <mesh name="wrist" file="wrist.stl"/>
+  </asset>
+
+  <worldbody>
+    <body name="base">
+      <geom class="visual" mesh="base"/>
+      <geom class="collision" mesh="base"/>
+      <body name="torso" pos="0 0.02 0.12  " quat="1 -1 0 0">
+        <joint name="joint_1" range="-0.4 1.35" axis="0 1 0"/>
+        <geom class="visual" mesh="torso"/>
+        <geom class="collision" mesh="torso"/>
+        <body name="upper_arm" pos="-0.001 -0.01 0.005" quat="0.5 0.65 0 0">
+          <joint name="joint_2" axis="1 0 0"/>
+          <geom class="visual" mesh="upper_arm"/>
+          <geom class="collision" mesh="upper_arm"/>
+          <body name="lower_arm" pos="0.007 0.132 0" quat="0.6 -.15 0 0">
+            <joint name="joint_3" range="-0.4 1.7" axis="1 0 0"/>
+            <geom class="visual" mesh="lower_arm"/>
+            <geom class="collision" mesh="lower_arm"/>
+            <body name="wrist" pos="0 0 -0.08" quat="1 1 0 0">
+              <joint name="joint_4" range="-2.57 2.57" axis="0 1 0"/>
+              <geom class="visual" mesh="wrist"/>
+              <geom class="collision" mesh="wrist"/>
+              <body name="pen" pos="0 -0.045 -0.006375" quat="-0.2 0.6 -0.6 -0.2">
+                <geom class="visual" mesh="pen"/>
+                <geom class="collision" mesh="pen"/>
+                <body name="tip" pos="0 0 -0.01" quat="0.5 0 0 0.5">
+                    <geom class="visual" mesh="tip"/>
+                    <geom class="collision" mesh="tip"/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <position class="large_actuator" name="joint_1" joint="joint_1"/>
+    <position class="large_actuator" name="joint_2" joint="joint_2" ctrlrange="-0.4 1.35"/>
+    <position class="large_actuator" name="joint_3" joint="joint_3" ctrlrange="-0.4 1.7"/>
+    <position class="small_actuator" name="joint_4" joint="joint_4" ctrlrange="-2.5795966344476193 2.5795966344476193"/>
+  </actuator>
+</mujoco>
