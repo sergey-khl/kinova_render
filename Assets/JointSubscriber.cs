@@ -11,9 +11,6 @@ using Mujoco;
 using System.Linq;
 using UnityEngine.Rendering.Universal;
 
-
-using RosJoint = RosMessageTypes.Assets.OmniJointStateMsg;
-
 public class JointSubscriber : MonoBehaviour
 {
     public static byte[] data;
@@ -94,6 +91,7 @@ public class JointSubscriber : MonoBehaviour
         return -1; // Return a default value if the name doesn't match expected format
     }
 
+    //  void FixedUpdate()
      void Update()
     {
 
@@ -195,13 +193,6 @@ public class JointSubscriber : MonoBehaviour
         }
     }
 
-    // sends pose and jaw messages to dVRK over UDP connection
-    public void UDPsend(string force_message)
-    {
-        // send json strings to dVRK //
-        send_msg = Encoding.UTF8.GetBytes(force_message);
-        socket.SendTo(send_msg, remote);
-    }
 
     public void PauseRecord()
     {
